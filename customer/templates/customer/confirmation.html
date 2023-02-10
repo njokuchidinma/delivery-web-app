@@ -1,0 +1,110 @@
+{% extends 'customer/base.html' %}
+
+{% block content %}
+<div class="container mb-5">
+  <div class="row justify-content-center mt-1">
+    <div class="col-md-5 col-sm-12 p-4 text-center">
+      <h1>Order Received!</h1>
+      <p>You should receive a confirmation email soon.</p>
+      <a href="{% url 'index' %}">Return to the homepage</a>
+    </div>
+  </div>
+  <div class="row justify-content-center mt-5">
+    <div class="col-md-5 col-sm-12 text-center">
+      <h3 class="pb-3">Order Summary:</h3>
+      {% for item in items %}
+          <p>{{ item.name }} <span class="pl-3">{{ item.price }}</span></p>   
+      {% endfor %}
+      <p class="font-weight-bold pt-4"><b>Total Cost: {{ price }}</b></p>
+    </div>
+  </div>
+  <div class="row justify-content-center pb-2 pt-5">
+    <div class="col-md-6 text-center">
+      <h3>Pay Now Or Pay on Delivery</h3>
+    </div>
+  </div>
+  <div class="row justify-content-center pb-5">
+    <div class="col-md-6 text-center">
+      <div id="paypal-button"></div>
+      <div id="paypal-button-container"></div>
+        <!-- Sample PayPal credentials (client-id) are included -->
+        <script src="https://www.paypal.com/sdk/js?client-id=ATyfJ936Q5qmz0Qwx67UqkXB6IlM2GxoxgMLYam8taVjc0fLU11KX05-oZoykatdvVjxNjFWSNZVkdYS&currency=USD&intent=capture&enable-funding=venmo" data_source="integrationbuilder"></script>
+
+        <script>
+          const fundingSources = [
+            paypal.FUNDING.PAYPAL,
+              paypal.FUNDING.VENMO,
+              paypal.FUNDING.PAYLATER,
+              paypal.FUNDING.CARD
+            ]
+
+          for (const fundingSource of fundingSources) {
+            const paypalButtonsComponent = paypal.Buttons({
+              fundingSource: fundingSource,
+
+              // optional styling for buttons
+              // https://developer.paypal.com/docs/checkout/standard/customize/buttons-style-guide/
+              style: {
+                shape: 'pill',
+                height: 40,
+              },
+
+              // set up the transaction
+              createOrder: (data, actions) => {
+                // pass in any options from the v2 orders create call:
+                // https://developer.paypal.com/api/orders/v2/#orders-create-request-body
+                const createOrderPayload = {
+                  purchase_units: [
+                    {
+                      amount: {
+                        value: {{ price }},
+                      },
+                    },
+                  ],
+                }
+
+                return actions.order.create(createOrderPayload)
+              },
+
+              //finalize the transaction
+              onApprove: (data, actions) => {
+                const captureOrderHandler = (details) => {
+                  const payerName = details.payer.name.given_name
+                  console.log('Transaction completed!')
+                }
+                fetch('http://127.0.0.1:8000/confirmation/{{pk}}', {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ "isPaid": true })
+                })
+                window.location.href = "http://127.0.0.1:8000/payment-confirmation/"
+                return actions.order.capture().then(captureOrderHandler)
+              },
+
+              // handle unrecoverable errors
+              onError: (err) => {
+                console.error(
+                  'An error prevented the buyer from checking out with PayPal',
+                )
+              },
+            })
+
+            if (paypalButtonsComponent.isEligible()) {
+              paypalButtonsComponent
+                .render('#paypal-button-container')
+                .catch((err) => {
+                  console.error('PayPal Buttons failed to render')
+                })
+            } else {
+              console.log('The funding source is ineligible')
+            }
+          }
+        </script>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,67 @@
+{% extends 'customer/base.html' %}
+
+{% block content %}
+<div class="container mb-5">
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-8 col-sm-12 offset-md-1 p-4 text-center">
+            <h2>Contact Us</h2>
+        </div>
+    </div>
+    <div class="row justify-content-center mt-1">
+        <div class="card col-md-10 col-sm-12 offset-md-1 p-4 text-center">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis modi facere minus pariatur voluptatum eveniet dolor sapiente, mollitia earum, fugiat quisquam temporibus ad voluptates ipsam esse, necessitatibus vero! Velit, harum?</p>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="card col-md-5 mr-3">
+                <div class="icon"><i class="fa fa-map-marker" aria-hidden="true"></i></div>
+                <div class="text-center pt-2">
+                    <h3>Address</h3>
+                    <p>4671 Sugar Camp Road, <br>Oatonna,Minnesota,<br>55060</p>
+                </div>
+            </div>
+            <div class="card col-md-5 mr-3">
+                <div class="icon"><i class="fa fa-phone" aria-hidden="true"></i></div>
+                <div class="text-center pt-2">
+                    <h3>Phone</h3>
+                    <p>81-55-62-6617</p>
+                </div>
+            </div>
+            <div class="card col-md-5 mr-3">
+                <div class="icon"><i class="fa fa-envelope" aria-hidden="true"></i></div>
+                <div class="text-center pt-2">
+                    <h3>Email</h3>
+                    <p>helpdesk@letseat.com</p>
+                </div>
+            </div>
+        </div>
+        <div class="contactForm">
+            <div class="row justify-content-center">
+                <form>
+                    <h2>Any Problems? Let Us Know Below</h2>
+                    <div class="inputBox">
+                        <input type="text" name="" required="required">
+                        <span>Full Name</span>
+                    </div>
+                    <div class="inputBox">
+                        <input type="text" name="" required="required">
+                        <span>Email</span>
+                    </div>
+                    <div class="inputBox">
+                        <textarea required="required"></textarea>
+                        <span>Type your Message...</span>
+                        <div class="inputBox">
+                            <input type="submit" name="" value="Send">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+            <br>
+            <br>
+            <br>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,11 @@
+{% load static %}
+<footer class="page-footer font-small fixed-bottlom text-center" style="background-color: #e66114e8">
+    <div class="footer-copyright text-center p-3">&copy; 2022 Copyright: 
+            <a class="text-light" href="{% url 'index' %}">
+                <img src="{% static 'logo.png' %}" alt="site logo" class="main-logo">
+            </a>
+            <a class="text-light" href="{% url 'dashboard' %}">
+                <img src="{% static 'logo2.png' %}" alt="site logo" class="main-logo">
+            </a>
+    </div>    
+</footer>

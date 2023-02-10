@@ -1,0 +1,48 @@
+{% load static %}
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #e66114e8">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{% url 'index' %}">
+      <img src="{% static 'logo.png' %}" alt="site logo" class="main-logo">
+    </a>
+    <button onclick="openmenu()" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <ul class="navbar-nav" id="sidemenu">
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'menu' %}">Menu</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'order' %}">Place an Order!</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'about' %}">About Us</span></a>
+        </li>
+      </ul>
+      <ul class="navbar-nav ms-auto" id="sidemenu">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'contact' %}">Contact Us</a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="mobile-nav hide-nav" id="mobile-nav">
+      <i class="fa fa-times close-nav" aria-hidden="true" onclick="closemenu()"></i>
+
+      <ul class="mobile-navbar-nav" id="sidemenu">
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'menu' %}">Menu</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'order' %}">Place an Order!</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'about' %}">About Us</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'contact' %}">Contact Us</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
